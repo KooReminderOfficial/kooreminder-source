@@ -47,6 +47,19 @@ def alarms_list(request):
 
 
 @csrf_exempt
+def reboot(request):
+    system("reboot")
+    return HttpResponse(content='<script> alert("Device rebooted!"); location.href = "/"; </script>')
+
+
+@csrf_exempt
+def factory_reset(request):
+    Alarm.objects.all().delete()
+    create_update_file()
+    return HttpResponse(content='<script> alert("All alarms have been deleted"); location.href = "/"; </script>')
+
+
+@csrf_exempt
 def datetime_set(request):
     # Set up the date and time
     # Setting the time with system() is a big security flaw (RCE) and I should find an alternative soon.
