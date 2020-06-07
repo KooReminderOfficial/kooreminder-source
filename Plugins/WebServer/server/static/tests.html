@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Tests page! </title>
+    </head>
+    <body>
+        <div style='background-color: #eaeaea'>
+            <h1> alarms_add </h1>
+            <form method="POST" action="http://localhost:8000/system/alarms/add">
+                <input type='text' name='time' placeholder="time" />
+                <input type='text' name='title' placeholder="title" />
+                <input type='text' name='repeat' placeholder="repeat" />
+                <input type='text' name='sound' placeholder="sound" />
+                <button type='submit'>perform action</button>
+            </form>
+        </div>
+        
+        <div style='background-color: #dadada'>
+            <h1> alarms_remove </h1>
+            <form method="POST" action="http://localhost:8000/system/alarms/remove">
+                <input type='text' name='id' placeholder="id" />
+                <button type='submit'>perform action</button>
+            </form>
+        </div>
+
+        <div style='background-color: #cacaca'>
+            <h1> alarms_list </h1>
+            <form method="POST" action="http://localhost:8000/system/alarms/list">
+                <button type='submit'>perform action</button>
+            </form>
+        </div>
+        
+        <div style='background-color: #bababa'>
+            <h1> datetime_set </h1>
+            <form method="POST" action="http://localhost:8000/system/datetime/set">
+                <input type='text' name='date' placeholder="date" />
+                <input type='text' name='time' placeholder="time" />
+                <button type='submit'>perform action</button>
+            </form>
+        </div>
+    </body>
+</html>

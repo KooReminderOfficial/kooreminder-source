@@ -1,0 +1,29 @@
+* {
+    font-family: Ubuntu Mono;
+    color: #cacaca;
+}
+
+#lbl_time {
+    font-size: 7.8em;
+    color: #32fa32;
+}
+
+#lbl_date {
+    font-size: 2.7em;
+}
+
+.lbl_alarmTitle * {
+    font-size: 6em;
+    color: #32fa32;
+}
+
+.alarm {
+    font-size: 2em;
+    color: #32fa32;
+}
+
+.mainSettingsOption {
+}
+
+.mainSettingsOption:active {
+}

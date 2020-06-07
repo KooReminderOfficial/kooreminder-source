@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--Import Google Icon Font-->
+        <link href="fonts/material.css" rel="stylesheet">
+        
+        <!--Import materialize.css-->
+        <link rel="stylesheet" href="css/materialize.css">
+        <!--Material Design Icons-->
+        <link rel="stylesheet" href="css/materialdesignicons.min.css">
+        <!--custom CSS-->
+        <link type="text/css" rel="stylesheet" href="css/style.css" />
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    </head>
+
+    <body>
+        <!--Navbar-->
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper colorblue">
+                    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <img href="#!" class="brand-logo center" src="favicon.jpg" />
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="settings.html"><i class="mdi mdi-settings right"></i>Settings</a> </li>
+                        <li><a href="info.html"><i class="mdi mdi-information right"></i>Info</a></li>
+                        <li><a href="guide.html"><i class="mdi mdi-help-circle right"></i>User guide</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <ul id="slide-out" class="sidenav">
+            <li><a href="settings.html"><i class="mdi mdi-settings right"></i>Settings</a></li>
+            <li><a href="info.html"><i class="mdi mdi-information right"></i>Info</a></li>
+            <li><a href="guide.html"><i class="mdi mdi-help-circle right"></i>User guide</a></li>
+        </ul>
+
+        <!-- Date and Time section -->
+        <div class="row">
+            <div class="col s12 m8 offset-m2 rounded">
+                <div class="card blue hoverable lighten-1">
+                    <div class="card-content white-text center">
+                        <pre id="labelTime" class="datetime"></pre>
+                        <pre id="labelDate" class="datetime"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alarms stack -->
+        <div id="alarmsStack" class="row">
+            <div class="col s12 m8 offset-m2 rounded">
+                <div class="card blue hoverable">
+                    <div class="card-content white-text center">
+                        <a data-target="AddAlarmWizard" class="btn-floating halfway-fab red btn-large darken-1" onclick="switch_pages()">
+                            <i class="material-icons" id="AddOrListButton"> list </i>
+                        </a>
+                    </div>
+                    
+                    <!-- Alarms List -->
+                    <div class="row" id="AlarmsList">
+                        <div class="col s12 m8 offset-m2">
+                            <div class="card hoverable white darken-1">
+                                <div class="card-content black-text">
+                                    <span class="card-title"> Alarms </span>
+                                    <div id="AlarmsList-list">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Add Alarm Wizard -->
+                    <div class="row" id="AddAlarmWizard" hidden>
+                        <div class="col s12 m8 offset-m2">
+                            <div class="card hoverable white darken-1">
+                                <div class="card-content white-text">
+                                    <span class="card-title black-text"> New Alarm </span>
+                                    <div class="divider"></div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <input id="alarm_name" type="text" class="validate">
+                                            <label for="alarm_name">Name</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input id="alarm_time" type="text" class="timepicker">
+                                            <label for="alarm_time">Time</label>
+                                        </div>
+                                        <div class="row AlarmHideOnSmall">
+                                            <label class="left-align col m4 s6">
+                                                <input type="checkbox" class="filled-in" checked="checked" id="rep_mon" />
+                                                <span>Monday</span>
+                                            </label>
+                                            <label class="left-align col m4 s6">
+                                                <input type="checkbox" class="filled-in" checked="checked" id="rep_tue" />
+                                                <span>Tuesday</span>
+                                            </label>
+                                            <label class="left-align col m4 s6">
+                                                <input type="checkbox" class="filled-in" checked="checked" id="rep_wed" />
+                                                <span>Wednesday</span>
+                                            </label>
+                                            <label class="left-align col m4 s6">
+                                                <input type="checkbox" class="filled-in" checked="checked" id="rep_thu" />
+                                                <span>Thursday</span>
+                                            </label>
+                                            <label class="left-align col m4 s6">
+                                                <input type="checkbox" class="filled-in" checked="checked" id="rep_fri" />
+                                                <span>Friday</span>
+                                            </label>
+                                            <label class="left-align col m4 s6">
+                                                <input type="checkbox" class="filled-in" checked="checked" id="rep_sat" />
+                                                <span>Saturday</span>
+                                            </label>
+                                            <label class="left-align col m4 s6">
+                                                <input type="checkbox" class="filled-in" checked="checked" id="rep_sun" />
+                                                <span>Sunday</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="valign-wrapper row">
+                                        <a data-target="modalSelectSong" onOpenStart="update_sounds_list()" class="s1 waves-effect waves-light blue btn modal-trigger" disabled>Select a song</a>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <a href="#!" class="waves-effect black-text waves-red btn-flat">Cancel</a>
+                                    <a href="#!" class="waves-effect black-text waves-green btn-flat" onclick="add_alarm()">Done</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+	<!--Modal Select Song-->
+	<div id="modalSelectSong" class="modal">
+		<div class="center modal-content">
+			<p><input type="file"></p>
+			<div id="FilesList"></div>
+		</div>
+	</div>
+
+        <!--JavaScript at end of body for optimized loading-->
+        <script src="js/jquery.js"></script>
+        <script src="js/materialize.js"></script>
+        <script src="js/masonry.pkgd.min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/datetime.js"></script>
+        <script>
+        
+            var bListsAlarms = true
+            var alarms = '{"alarms": []}'
+
+            addAlarmWizard = function () {
+                document.getElementById("AddAlarmWizard").hidden = false;
+            }
+
+            add_alarm = function () {
+                let title = document.getElementById("alarm_name").value
+                let time = document.getElementById("alarm_time").value
+                let media_file = ""
+                let days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+                let repeat = ''
+
+                for (let index in days) {
+                    if (document.getElementById(`rep_${days[index]}`).checked) {
+                        repeat += days[index][0]
+                    } else {
+                        repeat += '_'
+                    }
+                }
+
+                $.post(`/system/alarms/add`, {
+                    'title': title,
+                    'time': time,
+                    'repeat': repeat,
+                    'sound': media_file,
+                }).done((foo) => {
+                    update_alarms_list();
+                })
+
+                update_alarms_list()
+                switch_pages()
+            }
+            
+            remove_alarm = function(alarm_id) {
+                let CNodeToRemove = document.getElementById(`alarm_id_${alarm_id}`)
+                CNodeToRemove.parentNode.removeChild(CNodeToRemove)
+                
+                CNodeToRemove = document.getElementById(`alarm_divider_${alarm_id}`)
+                CNodeToRemove.parentNode.removeChild(CNodeToRemove)
+                
+                $.post("/system/alarms/remove", {
+                    'id': alarm_id
+                }).done((foo) => {
+                    
+                })
+            }
+
+            switch_pages = function () {
+                bListsAlarms = !bListsAlarms
+
+                if (bListsAlarms) {
+                    document.getElementById("AddOrListButton").classList.remove("mdi-add")
+                    document.getElementById("AddOrListButton").classList.add("mdi-list")
+                    document.getElementById("AddAlarmWizard").hidden = true
+                    document.getElementById("AlarmsList").hidden = false
+                } else {
+                    document.getElementById("AddOrListButton").classList.remove("mdi-list")
+                    document.getElementById("AddOrListButton").classList.add("mdi-add")
+                    document.getElementById("AddAlarmWizard").hidden = false
+                    document.getElementById("AlarmsList").hidden = true
+                }
+            }
+
+            update_alarms_list = function () {
+                let CBuffer = null;
+                $.ajax({
+                    url: "/system/alarms/list",
+                    async: true,
+                    success: function(text) {
+                        if (JSON.stringify(text) == alarms) {
+                            return;
+                        } 
+
+                        console.log(`bypassed`)
+                        document.getElementById('AlarmsList-list').innerHTML = ''
+                        CBuffer = JSON.parse(text);
+                        object_list = []
+                        for (let tmp in CBuffer) {
+                            let day_list = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+
+                            let CAlarmDivider = document.createElement("div")
+                            let CAlarmContainer = document.createElement("div")
+
+                            let CAlarmFirstRow = document.createElement("div")
+                            let CAlarmSecondRow = document.createElement("div")
+
+                            let CAlarmTime = document.createElement("p")
+                            let CAlarmTitle = document.createElement("p")
+                            let CAlarmRepeat = document.createElement("p")
+                            let CAlarmSoundName = document.createElement("i")
+
+                            let CAlarmDeleteLink = document.createElement("a")
+                            let CAlarmDeleteImage = document.createElement("i")
+
+                            CAlarmDivider.classList.add("divider")
+                            CAlarmDivider.setAttribute("id", `alarm_divider_${tmp}`)
+                            CAlarmContainer.setAttribute("id", `alarm_id_${tmp}`)
+
+                            CAlarmFirstRow.classList.add("row")
+                            CAlarmFirstRow.style.fontSize = "x-large"
+                            CAlarmFirstRow.style.display = "block"
+
+                            CAlarmSecondRow.classList.add("row", "grey-text")
+                            CAlarmSecondRow.style.fontSize = "x-small"
+                            CAlarmSecondRow.style.position = "relative"
+                            CAlarmSecondRow.style.top = "-20px"
+
+                            CAlarmTime.innerHTML = CBuffer[tmp]["time"]
+                            CAlarmTime.classList.add("col", "s2", "center-align")
+
+                            CAlarmTitle.innerHTML = CBuffer[tmp]["title"]
+                            CAlarmTitle.classList.add("col", "s8", "left-align", "truncate")
+
+                            CAlarmDeleteLink.classList.add("col", "s2", "right-align", "hover")
+                            CAlarmDeleteLink.setAttribute("onclick", `remove_alarm(${tmp})`)
+                            CAlarmDeleteImage.classList.add("btn", "red", "mdi", "mdi-delete")
+                            CAlarmDeleteLink.appendChild(CAlarmDeleteImage)
+
+                            CAlarmRepeat.style.fontFamily = "monospace"
+                            CAlarmRepeat.classList.add("center-align", "col", "s2")
+
+                            CAlarmRepeat.innerHTML = CBuffer[tmp]["repeat"];
+
+                            CAlarmFirstRow.appendChild(CAlarmTime)
+                            CAlarmFirstRow.appendChild(CAlarmTitle)
+                            CAlarmFirstRow.appendChild(CAlarmDeleteLink)
+
+                            CAlarmSecondRow.appendChild(CAlarmRepeat)
+                            CAlarmSecondRow.appendChild(CAlarmSoundName)
+
+                            CAlarmContainer.appendChild(CAlarmFirstRow)
+                            CAlarmContainer.appendChild(CAlarmSecondRow)
+
+                            document.getElementById("AlarmsList-list").appendChild(CAlarmDivider)
+                            document.getElementById("AlarmsList-list").appendChild(CAlarmContainer)
+                        }
+
+                        alarms = JSON.stringify(text)
+                    }
+                })    
+            }
+
+            update_sounds_list = function() {
+                let lpBuffer = []
+                $.ajax({
+                    url: "/config/getSoundFiles",
+                    success: function(text) {
+                        lpBuffer = text.split(",")
+
+                        let CDaAppiccareA = document.getElementById("FilesList")
+                        CDaAppiccareA.innerHTML = ''
+
+                        for (let index in lpBuffer) {
+                            let CTmpNome = document.createElement("p")
+                            let CDivider = document.createElement("div")
+                            //let CRadioButton = document.createElement("input")
+                        
+                            //CRadioButton.setAttribute("type", "radio")
+                        
+                            CDivider.classList.add("divider")
+                            CTmpNome.classList.add("left-align", "truncate")
+                            CTmpNome.innerHTML = lpBuffer[index]
+                        
+                            CDaAppiccareA.appendChild(CDivider)
+                            //CDaAppiccareA.appendChild(CRadioButton)
+                            CDaAppiccareA.appendChild(CTmpNome)
+                        }
+                    }
+                })
+            }         
+
+            $(document).ready(function() {
+                let currentDateTime = new Date()
+                let currentDate = (currentDateTime.getYear() + 1900) + '-' + (currentDateTime.getMonth() + 1) + '-' + (currentDateTime.getDay())
+                let currentTime = padDT(currentDateTime.getHours()) + ':' + padDT(currentDateTime.getMinutes()) + ':' + padDT(currentDateTime.getSeconds())
+                $.post('/system/datetime/set', {
+                    'date': currentDate,
+                    'time': currentTime
+                })
+            })
+            update_alarms_list();
+        </script>
+    </body>
+</html>
