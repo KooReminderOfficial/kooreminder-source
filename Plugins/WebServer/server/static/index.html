@@ -262,10 +262,10 @@
                             CAlarmSecondRow.style.top = "-20px"
 
                             CAlarmTime.innerHTML = CBuffer[tmp]["time"]
-                            CAlarmTime.classList.add("col", "s4", "b2", "center-align")
+                            CAlarmTime.classList.add("col", "s4", "l2", "left-align")
 
                             CAlarmTitle.innerHTML = CBuffer[tmp]["title"]
-                            CAlarmTitle.classList.add("col", "s6", "b8", "left-align", "truncate")
+                            CAlarmTitle.classList.add("col", "s6", "l8", "left-align", "truncate")
 
                             CAlarmDeleteLink.classList.add("col", "s2", "right-align", "hover")
                             CAlarmDeleteLink.setAttribute("onclick", `remove_alarm(${tmp})`)
@@ -273,7 +273,7 @@
                             CAlarmDeleteLink.appendChild(CAlarmDeleteImage)
 
                             CAlarmRepeat.style.fontFamily = "monospace"
-                            CAlarmRepeat.classList.add("center-align", "col", "s2")
+                            CAlarmRepeat.classList.add("left-align", "col", "s2")
 
                             CAlarmRepeat.innerHTML = CBuffer[tmp]["repeat"];
 
@@ -327,7 +327,7 @@
 
             $(document).ready(function() {
                 let currentDateTime = new Date()
-                let currentDate = (currentDateTime.getYear() + 1900) + '-' + (currentDateTime.getMonth() + 1) + '-' + (currentDateTime.getDay())
+                let currentDate = (currentDateTime.getYear() + 1900) + '-' + (currentDateTime.getMonth() + 1) + '-' + (currentDateTime.getDate())
                 let currentTime = padDT(currentDateTime.getHours()) + ':' + padDT(currentDateTime.getMinutes()) + ':' + padDT(currentDateTime.getSeconds())
                 $.post('/system/datetime/set', {
                     'date': currentDate,
